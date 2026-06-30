@@ -28,29 +28,41 @@
    예측 발전량과 실제 발전량의 차이를 window feature로 만들고, GHI 구간별 LightGBM
    detector를 학습해 FDI 공격 여부를 분류합니다.
 
-## 정리 방향
+## 연구 배경
 
-기존 실험 폴더 `green_hyp`에는 raw dataset, feature cache, 모델 checkpoint, 중간 결과,
-zip 파일 등이 함께 섞여 있어 용량이 약 13GB였습니다. 이 저장소용 폴더는 공개 및 제출에
-필요한 핵심 코드, 문서, 요약 결과만 남긴 정리본입니다.
+그린수소 생산 시스템에서는 태양광, 풍력과 같은 재생에너지 발전량 데이터가 생산량
+산정과 인증의 기반이 됩니다. 발전량 데이터가 조작되면 실제보다 많은 재생에너지가
+생산된 것처럼 기록될 수 있고, 이는 그린수소 인증, 전력 거래, 정산, 블록체인 기반
+이력 관리의 신뢰성을 떨어뜨릴 수 있습니다.
 
-포함한 항목:
+이 연구는 태양광 발전 데이터에 주입되는 FDI 공격을 탐지하여, 그린수소 생산 및
+재생에너지 데이터 관리 플랫폼에서 사용할 수 있는 데이터 무결성 검증 계층을 설계하는
+것을 목표로 합니다.
 
-- 제안 모델 코드
-- 비교 모델 코드
-- 최종 요약 결과 CSV/JSON
-- 데이터 사용 protocol 문서
-- 실험 및 비교 모델 설명 문서
+## 문제 정의
 
-제외한 항목:
+탐지 대상은 태양광 발전량 시계열에 대한 조작 공격입니다. 공격자는 발전량 값을 일정
+비율로 조작하거나, 시간에 따라 서서히 변화하는 slow-ramp 형태로 데이터를 변조할 수
+있습니다. 모델은 날씨와 시간 조건상 기대되는 정상 발전량과 실제 관측값의 차이를
+분석하여 공격 여부를 판단합니다.
 
-- Raw CSV dataset
-- Feature cache
-- 학습된 모델 파일
-- 대용량 prediction CSV
-- `__pycache__`
-- zip 백업 파일
-- 중간 실험 plot 및 임시 결과물
+주요 평가 조건은 다음과 같습니다.
+
+- SA 5%, SA 8%, SA 10% 공격 탐지
+- Slow-ramp 8%, Slow-ramp 10% 공격 탐지
+- 학습에 사용하지 않은 설비용량과 기간에 대한 external test
+- Precision, Recall, F1, FPR, day-level recall/FPR 기반 평가
+
+## 연구 기여
+
+- 정상 발전량 예측과 공격 탐지를 분리한 2단계 FDI 탐지 구조를 설계했습니다.
+- Clean 데이터만으로 정상 발전량 forecaster를 학습하고, residual 기반 detector로 공격을
+  분류했습니다.
+- GHI 변화량, 시간 feature, rolling residual window feature를 결합해 발전량 조작 패턴을
+  탐지했습니다.
+- SA 공격뿐 아니라 slow-ramp 공격에서도 성능을 평가했습니다.
+- CNN-LSTM prediction interval, supervised ensemble, feature-matched ensemble 등 여러
+  비교 모델과 동일 평가 조건에서 성능을 비교했습니다.
 
 ## 폴더 구조
 
