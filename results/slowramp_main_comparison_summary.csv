@@ -1,0 +1,7 @@
+model,method_type,attack,accuracy,precision,recall,f1,fpr,pa_f1,day_recall,day_fpr
+Proposed entro2+test_ver7,Two-stage LightGBM residual detector,Ramp8,0.9793,0.8686,0.6786,0.7619,0.0053,,0.3143,0.1679
+Proposed entro2+test_ver7,Two-stage LightGBM residual detector,Ramp10,0.9879,0.8929,0.8555,0.8738,0.0053,,0.3714,0.1679
+CNN-LSTM PI single-site aligned,Deep learning PI clean-only,Ramp8,0.5885,0.0618,0.5089,0.1103,0.4073,0.1862,0.8857,0.9649
+CNN-LSTM PI single-site aligned,Deep learning PI clean-only,Ramp10,0.5889,0.0627,0.5167,0.1119,0.4073,0.1910,0.9143,0.9649
+Tufail paper_with_time,Supervised RF/MLP/CNN-LSTM ensemble,Ramp8,0.9108,0.1442,0.1581,0.1508,0.0495,0.4780,0.6000,0.3649
+Tufail paper_with_time,Supervised RF/MLP/CNN-LSTM ensemble,Ramp10,0.9120,0.1635,0.1835,0.1729,0.0495,0.4918,0.6286,0.3649

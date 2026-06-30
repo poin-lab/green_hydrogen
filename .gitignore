@@ -1,0 +1,48 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+
+# Local data
+dataset_clean/
+dataset5.4_attack/
+dataset5.4kw_attack/
+dataset6.0_attack/
+dataset26.52_attack/
+dataset105.9kw_attack/
+data/*.csv
+test_data/
+t_data/
+train_data/
+
+# Experiment outputs and caches
+feature_cache*/
+detector_model*/
+model_output*/
+paper_weather_baseline_output/
+paper_weather_only_compare/output/
+catboost_info/
+plots*/
+predictions/
+models/
+
+# Large artifacts
+*.zip
+*.pkl
+*.pt
+*.pth
+*.cbm
+*.joblib
+
+# Local generated reports
+*.png
+*.pdf
+
+# OS/editor
+.DS_Store
+.idea/
+.vscode/
